@@ -1,0 +1,129 @@
+[
+  {
+    "name": "Acme DISC",
+    "price": 1,
+    "sku": "JVC200123",
+    "type": "DVD",
+    "attributes": {
+      "size": 700 
+    }
+  },
+  {
+    "name": "Avme DISC",
+    "price": 2,
+    "sku": "JVC200124",
+    "type": "DVD",
+    "attributes": {
+      "size": 750 
+    }
+  },
+  {
+    "name": "Alme DISC",
+    "price": 2.5,
+    "sku": "JVC205124",
+    "type": "DVD",
+    "attributes": {
+      "size": 1000 
+    }
+  },
+  {
+    "name": "Allue DISC",
+    "price": 0.5,
+    "sku": "JVC205624",
+    "type": "DVD",
+    "attributes": {
+      "size": 4000 
+    }
+  },
+  {
+    "name": "War and Peace",
+    "price": 20.5,
+    "sku": "GGWP0007",
+    "type": "Book",
+    "attributes": {
+      "weight": 2 
+    }
+  },
+  {
+    "name": "War and Peace II",
+    "price": 16.5,
+    "sku": "GGWP0057",
+    "type": "Book",
+    "attributes": {
+      "weight": 1.5 
+    }
+  },
+  {
+    "name": "Anything For You!",
+    "price": 6.5,
+    "sku": "GGWP0657",
+    "type": "Book",
+    "attributes": {
+      "weight": 3 
+    }
+  },
+  {
+    "name": "10 Effective habits for losers",
+    "price": 10,
+    "sku": "GGWP0717",
+    "type": "Book",
+    "attributes": {
+      "weight": 1 
+    }
+  },
+  {
+    "name": "Chair",
+    "price": 40,
+    "sku": "TR12055",
+    "type": "Furniture",
+    "attributes": {
+      "height": 2,
+      "width": 2,
+      "length": 2 
+    }
+  },
+  {
+    "name": "Table",
+    "price": 40,
+    "sku": "TR12054",
+    "type": "Furniture",
+    "attributes": {
+      "height": 2,
+      "width": 2,
+      "length": 2 
+    }
+  },
+  {
+    "name": "Door",
+    "price": 40,
+    "sku": "TR12053",
+    "type": "Furniture",
+    "attributes": {
+      "height": 2,
+      "width": 2,
+      "length": 2 
+    }
+  },
+  {
+    "name": "Window",
+    "price": 40,
+    "sku": "TR12052",
+    "type": "Furniture",
+    "attributes": {
+      "height": 2,
+      "width": 2,
+      "length": 2 
+    }
+  },
+  {
+    "name": "Item 1",
+    "price": 40,
+    "sku": "TR12051",
+    "type": "Furniture",
+    "attributes": {
+      "height": 2,
+      "width": 2,
+      "length": 2 
+    }
+  }
+]

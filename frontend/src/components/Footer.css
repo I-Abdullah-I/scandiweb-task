@@ -1,0 +1,18 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+
+  max-width: 95%;
+  min-height: 5%;
+  background-color: white;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.footer > hr {
+  margin: 0;
+  border: 1px solid black;
+}

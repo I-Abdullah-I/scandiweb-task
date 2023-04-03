@@ -1,0 +1,13 @@
+.productExcerpt {
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+  border-radius: 5px;
+  text-align: center;
+  transition: 0.3s;
+  padding: 3%;
+}
+
+.delete-checkbox {
+  display: flex;
+}
