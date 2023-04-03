@@ -1,7 +1,6 @@
 import "./AddProductForm.css";
 
 import { useNavigate } from "react-router-dom";
-// import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { addProduct } from "../features/products/productsSlice";
@@ -13,7 +12,6 @@ import axios from "axios";
 const AddProductFormPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const [onSkuChange, setOnSkuChange] = useState(false);
 
   const validateUniqueSKU = async (value) => {
     const response = await axios.get(
@@ -45,13 +43,11 @@ const AddProductFormPage = () => {
         .test({
           name: "is_unique",
           message: "Another product is associated with the same sku.",
-          test: async (val, ctx) => {
+          test: async (val) => {
             const flag = await validateUniqueSKU(val);
-            // console.log(ctx);
             return flag;
           },
-          exclusive: true}
-        ),
+        }),
       name: Yup.string().required("Required"),
       price: Yup.number().required("Required").positive(),
       productType: Yup.string().required("Required"),
@@ -138,7 +134,6 @@ const AddProductFormPage = () => {
   );
 
   const saveProduct = async () => {
-    // console.log(formik.errors);
     let payload = formik.values;
     if (formik.isValid) {
       const attributes = [

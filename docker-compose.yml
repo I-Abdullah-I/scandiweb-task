@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+    client:
+        container_name: react-app
+        build: 
+            context: ./frontend
+            dockerfile: Dockerfile
+        networks:
+            - frontend
+        ports: 
+            - 8000:80
+        restart: always
+
+    server:
+        container_name: php-apache
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        networks:
+            - frontend
+            - backend
+        restart: always
+        depends_on:
+            - db
+        volumes:
+            - ./backend:/var/www/html/
+        ports:
+            - 8001:80
+
+    phpmyadmin:
+        container_name: phpmyadmin
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - '8002:80'
+        networks:
+            - backend
+        restart: always
+        environment:
+            PMA_HOST: db
+        depends_on:
+            - db
+    
+    db:
+      container_name: db
+      image: mysql
+      restart: always
+      command: --init-file /data/application/init.sql
+      networks:
+        - backend
+      volumes:
+        - ./backend/init.sql:/data/application/init.sql
+      environment:
+          MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
+          MYSQL_DATABASE: SCANDIWEB_TEST
+          MYSQL_USER: MYSQL_USER
+          MYSQL_PASSWORD: MYSQL_PASSWORD
+      ports:
+          - "8003:3306"
+
+networks:
+    frontend:
+        driver: bridge
+    backend:
+        driver: bridge
