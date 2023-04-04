@@ -74,10 +74,10 @@ const ProductsListPage = () => {
           <h1>Product List</h1>
           <div className="actionButtons">
             <button type="button" onClick={() => navigate("addproduct")}>
-              Add
+              ADD
             </button>
             <button type="button" onClick={() => massDeleteHandler()}>
-              Mass Delete
+              MASS DELETE
             </button>
           </div>
         </div>
