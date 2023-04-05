@@ -23,7 +23,6 @@ export const addProduct = createAsyncThunk(
   "products/addProduct",
   async (payload) => {
     const response = await axios.post(ADD_PRODUCT_URL, payload);
-    console.log(response.data);
     return response.data;
   }
 );
@@ -34,7 +33,6 @@ export const massDelete = createAsyncThunk(
     const response = await axios.delete(MASS_DELETE_PRODUCTS_URL, {
       data: payload,
     });
-    console.log(response.data);
     return response.data;
   }
 );

@@ -196,6 +196,7 @@ const AddProductFormPage = () => {
             <input
               id="sku"
               type="text"
+              autoFocus
               {...formik.getFieldProps("sku")}
             />
             {formik.touched.sku && formik.errors.sku ? (

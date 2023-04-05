@@ -12,7 +12,7 @@ class ProductController extends BaseController
 {
     private string $strErrorDesc, $strErrorHeader, $requestMethod;
     private $responseData, $payload;
-    
+        
     public function __construct()
     {
         $this->strErrorDesc = '';
