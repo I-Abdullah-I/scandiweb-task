@@ -125,5 +125,34 @@
       "width": 2,
       "length": 2 
     }
+  },
+  {
+    "name": "SKUTest000",
+    "price": 25,
+    "sku": "SKUTest000",
+    "type": "DVD",
+    "attributes": {
+      "size": 200 
+    }
+  },
+  {
+    "name": "SKUTest001",
+    "price": 25,
+    "sku": "SKUTest001",
+    "type": "Book",
+    "attributes": {
+      "weight": 200 
+    }
+  },
+  {
+    "name": "SKUTest002",
+    "price": 25,
+    "sku": "SKUTest002",
+    "type": "Furniture",
+    "attributes": {
+      "height": 200,
+      "width": 200,
+      "length": 200
+    }
   }
 ]
