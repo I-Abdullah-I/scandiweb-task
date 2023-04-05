@@ -1,19 +1,19 @@
 version: '3.9'
 
 services:
-    # client:
-    #     container_name: scandi-client
-    #     build: 
-    #         context: ./frontend
-    #         dockerfile: Dockerfile
-    #     networks:
-    #         - frontend
-    #     ports: 
-    #         - 8000:80
-    #     restart: always
+    client:
+        container_name: scandi-task-client
+        build: 
+            context: ./frontend
+            dockerfile: Dockerfile
+        networks:
+            - frontend
+        ports: 
+            - 8000:80
+        restart: always
 
     server:
-        container_name: scandi-server
+        container_name: scandi-task-server
         build:
             context: ./backend
             dockerfile: Dockerfile
@@ -29,7 +29,7 @@ services:
             - 8001:80
 
     phpmyadmin:
-        container_name: scandi-phpmyadmin
+        container_name: scandi-task-phpmyadmin
         image: phpmyadmin/phpmyadmin
         ports:
             - '8002:80'
@@ -42,7 +42,7 @@ services:
             - db
     
     db:
-      container_name: scandi-db
+      container_name: scandi-task-db
       image: mysql
       restart: always
       command: --init-file /data/application/init.sql
