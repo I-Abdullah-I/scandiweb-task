@@ -170,6 +170,12 @@ const AddProductFormPage = () => {
       } catch (error) {
         console.error(error);
       }
+    } else {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/product/errorLog`,
+        formik.errors
+      );
+      console.log(response.data);
     }
   };
 

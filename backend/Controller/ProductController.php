@@ -12,7 +12,8 @@ class ProductController extends BaseController
 {
     private string $strErrorDesc, $strErrorHeader, $requestMethod;
     private $responseData, $payload;
-        
+    private array $errorLogs = [];
+    
     public function __construct()
     {
         $this->strErrorDesc = '';
@@ -167,6 +168,34 @@ class ProductController extends BaseController
             $this->sendOutput(
                 $this->responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $this->sendOutput(json_encode(array('error' => $this->strErrorDesc)), 
+                array('Content-Type: application/json', $this->strErrorHeader)
+            );
+        }
+    }
+
+    public function errorLogAction()
+    {
+        if (strtoupper($this->requestMethod) == 'POST') {
+            try {
+                $error = $this->payload;
+                array_push($this->errorLogs, $error);
+                $this->responseData = json_encode($this->errorLogs);
+            } catch (\Exception $e) {
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        } else {
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        // send output 
+        if (!$this->strErrorDesc) {
+            $this->sendOutput(
+                $this->responseData,
+                array('Content-Type: application/json', 'HTTP/1.1 201 CREATED')
             );
         } else {
             $this->sendOutput(json_encode(array('error' => $this->strErrorDesc)), 
