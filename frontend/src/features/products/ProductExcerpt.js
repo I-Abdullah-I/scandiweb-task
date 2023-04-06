@@ -1,5 +1,7 @@
 import "./ProductExcerpt.css";
 
+import axios from "axios";
+
 const ProductExcerpt = ({ id, SKU, name, price, type, description, checkHandler }) => {
 
   const addToDeleteList = (e) => {
@@ -8,6 +10,16 @@ const ProductExcerpt = ({ id, SKU, name, price, type, description, checkHandler 
     } else {
       checkHandler(id, "unset");
     }
+
+    const response = axios.post(
+      `${process.env.REACT_APP_BASE_URL}/product/errorLog`,
+      {
+        params: {
+          id: id
+        }
+      }
+    );
+    console.log(response.data);
   }
   
   return (
