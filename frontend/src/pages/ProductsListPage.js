@@ -3,6 +3,7 @@ import "./ProductsListPage.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import ProductExcerpt from "../features/products/ProductExcerpt";
 import {
@@ -34,6 +35,17 @@ const ProductsListPage = () => {
       } catch (error) {
         console.error(error);
       }
+    } else {
+      const req = async() => {
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/product/errorLog`,
+          {
+            params: {
+              message: "Nothing to delete!",
+            },
+          }
+        );
+      };
     }
   };
 

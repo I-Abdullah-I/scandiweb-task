@@ -2,8 +2,15 @@ import "./ProductExcerpt.css";
 
 import axios from "axios";
 
-const ProductExcerpt = ({ id, SKU, name, price, type, description, checkHandler }) => {
-
+const ProductExcerpt = ({
+  id,
+  SKU,
+  name,
+  price,
+  type,
+  description,
+  checkHandler,
+}) => {
   const addToDeleteList = (e) => {
     if (e.target.checked) {
       checkHandler(id, "set");
@@ -11,20 +18,27 @@ const ProductExcerpt = ({ id, SKU, name, price, type, description, checkHandler 
       checkHandler(id, "unset");
     }
 
-    const response = axios.post(
-      `${process.env.REACT_APP_BASE_URL}/product/errorLog`,
-      {
-        params: {
-          id: id
+    const req = async() => {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/product/errorLog`,
+        {
+          params: {
+            id: id,
+          },
         }
-      }
-    );
-    console.log(response.data);
-  }
-  
+      );
+    };
+  };
+
   return (
     <div id={id} className="productExcerpt">
-      <input id="delete-checkbox" name="delete-checkbox" type="checkbox" className="delete-checkbox" onChange={addToDeleteList}/>
+      <input
+        id="delete-checkbox"
+        name="delete-checkbox"
+        type="checkbox"
+        className="delete-checkbox"
+        onChange={addToDeleteList}
+      />
       <h4>{SKU}</h4>
       <h4>{name}</h4>
       <h4>{price}$</h4>
