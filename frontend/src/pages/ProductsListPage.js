@@ -36,16 +36,13 @@ const ProductsListPage = () => {
         console.error(error);
       }
     } else {
-      const req = async() => {
-        const response = await axios.post(
-          `${process.env.REACT_APP_BASE_URL}/product/errorLog`,
-          {
-            params: {
-              message: "Nothing to delete!",
-            },
-          }
-        );
-      };
+      (async () => {
+        await axios.post(`${process.env.REACT_APP_BASE_URL}/product/errorLog`, {}, {
+          params: {
+            message: "Nothing to delete!",
+          },
+        });
+      })();
     }
   };
 
@@ -80,10 +77,18 @@ const ProductsListPage = () => {
         <div className="nav">
           <h1>Product List</h1>
           <div className="actionButtons">
-            <button name="ADD" type="submit" onClick={() => navigate("addproduct")}>
+            <button
+              name="ADD"
+              type="submit"
+              onClick={() => navigate("addproduct")}
+            >
               ADD
             </button>
-            <button name="MASS DELETE" type="submit" onClick={() => massDeleteHandler()}>
+            <button
+              name="MASS DELETE"
+              type="submit"
+              onClick={() => massDeleteHandler()}
+            >
               MASS DELETE
             </button>
           </div>

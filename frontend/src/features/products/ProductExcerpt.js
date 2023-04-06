@@ -17,17 +17,13 @@ const ProductExcerpt = ({
     } else {
       checkHandler(id, "unset");
     }
-
-    const req = async() => {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/product/errorLog`,
-        {
-          params: {
-            id: id,
-          },
-        }
-      );
-    };
+    (async () => {
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/product/errorLog`, {}, {
+        params: {
+          id: id,
+        },
+      });
+    })();
   };
 
   return (
