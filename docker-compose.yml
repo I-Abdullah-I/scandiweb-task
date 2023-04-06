@@ -1,16 +1,16 @@
 version: '3.9'
 
 services:
-    # client:
-    #     container_name: scandi-task-client
-    #     build: 
-    #         context: ./frontend
-    #         dockerfile: Dockerfile
-    #     networks:
-    #         - frontend
-    #     ports: 
-    #         - 8000:80
-    #     restart: always
+    client:
+        container_name: scandi-task-client
+        build: 
+            context: ./frontend
+            dockerfile: Dockerfile
+        networks:
+            - frontend
+        ports: 
+            - 8000:80
+        restart: always
 
     server:
         container_name: scandi-task-server
