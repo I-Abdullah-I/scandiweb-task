@@ -12,7 +12,6 @@ class ProductController extends BaseController
 {
     private string $strErrorDesc, $strErrorHeader, $requestMethod;
     private $responseData, $payload;
-    private array $errorLogs = [];
     
     public function __construct()
     {
@@ -181,8 +180,7 @@ class ProductController extends BaseController
         if (strtoupper($this->requestMethod) == 'POST') {
             try {
                 $error = $this->payload;
-                array_push($this->errorLogs, $error);
-                $this->responseData = json_encode($this->errorLogs);
+                $this->responseData = json_encode($error);
             } catch (\Exception $e) {
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
