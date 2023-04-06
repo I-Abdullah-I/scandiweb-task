@@ -18,7 +18,6 @@ const ProductsListPage = () => {
   const products = useSelector(selectAllProducts);
   const status = useSelector(getStatus);
   const [deleteList, setDeleteList] = useState([]);
-  const [deleteRequestStatus, setDeleteRequestStatus] = useState("idle");
 
   const setDeleteListWrapper = (value, action) => {
     if (action === "set") {
@@ -29,15 +28,11 @@ const ProductsListPage = () => {
   };
 
   const massDeleteHandler = async () => {
-    if (deleteList.length && deleteRequestStatus === "idle") {
+    if (deleteList.length) {
       try {
-        setDeleteRequestStatus("pending");
         await dispatch(massDelete(deleteList)).unwrap();
       } catch (error) {
-        setDeleteRequestStatus("failed");
         console.error(error);
-      } finally {
-        setDeleteRequestStatus("idle");
       }
     }
   };

@@ -12,7 +12,7 @@ const ProductExcerpt = ({ id, SKU, name, price, type, description, checkHandler 
   
   return (
     <div id={id} className="productExcerpt">
-      <input type="checkbox" className="delete-checkbox" onChange={addToDeleteList}/>
+      <input id="delete-checkbox" name="delete-checkbox" type="checkbox" className="delete-checkbox" onChange={addToDeleteList}/>
       <h4>{SKU}</h4>
       <h4>{name}</h4>
       <h4>{price}$</h4>
