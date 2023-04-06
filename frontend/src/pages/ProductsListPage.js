@@ -73,10 +73,10 @@ const ProductsListPage = () => {
         <div className="nav">
           <h1>Product List</h1>
           <div className="actionButtons">
-            <button type="button" onClick={() => navigate("addproduct")}>
+            <button type="button" onClick={() => navigate("addproduct")} onKeyDown={() => navigate("addproduct")}>
               ADD
             </button>
-            <button type="button" onClick={() => massDeleteHandler()}>
+            <button type="button" onClick={() => massDeleteHandler()} onKeyDown={() => massDeleteHandler()}>
               MASS DELETE
             </button>
           </div>
