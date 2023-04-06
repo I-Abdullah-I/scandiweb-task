@@ -13,12 +13,16 @@ const AddProductFormPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const validateUniqueSKU = async (value) => {
+  const validateUniqueSKU = async (value, formValues) => {
     const response = await axios.get(
       `${process.env.REACT_APP_BASE_URL}/product/fetch`,
       {
         params: {
           sku: value,
+          // sku: formValues.sku,
+          // name: formValues.name,
+          // price: formValues.price,
+          // productType: formValues.productType,
         },
       }
     );
@@ -39,15 +43,16 @@ const AddProductFormPage = () => {
     },
     validationSchema: Yup.object({
       sku: Yup.string()
-        .required("Required")
-        .test({
-          name: "is_unique",
-          message: "Another product is associated with the same sku.",
-          test: async (val) => {
-            const flag = await validateUniqueSKU(val);
-            return flag;
-          },
-        }),
+        .required("Required"),
+        // .test({
+        //   name: "is_unique",
+        //   message: "Another product is associated with the same sku.",
+        //   test: async (val, ctx) => {
+        //     // console.log(ctx.from[0].value);
+        //     const flag = await validateUniqueSKU(val, ctx.from[0].value);
+        //     return flag;
+        //   },
+        // }),
       name: Yup.string().required("Required"),
       price: Yup.number().required("Required").positive(),
       productType: Yup.string().required("Required"),
