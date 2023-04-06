@@ -28,6 +28,10 @@ const ProductsListPage = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(deleteList);
+  }, [deleteList])
+
   const massDeleteHandler = async () => {
     if (deleteList.length) {
       try {
