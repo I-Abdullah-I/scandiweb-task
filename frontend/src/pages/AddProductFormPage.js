@@ -185,7 +185,7 @@ const AddProductFormPage = () => {
         <div className="nav">
           <h1>Product Add</h1>
           <div className="actionButtons">
-            <button type="button" onClick={() => saveProduct()} onKeyDown={() => saveProduct()}>
+            <button name="Save" type="submit" onClick={() => saveProduct()}>
               Save
             </button>
             <button type="button" onClick={() => navigate("/")}>
