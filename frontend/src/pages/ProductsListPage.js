@@ -3,7 +3,6 @@ import "./ProductsListPage.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 import ProductExcerpt from "../features/products/ProductExcerpt";
 import {
@@ -28,25 +27,26 @@ const ProductsListPage = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(deleteList);
-  }, [deleteList])
-
   const massDeleteHandler = async () => {
     if (deleteList.length) {
       try {
         await dispatch(massDelete(deleteList)).unwrap();
       } catch (error) {
         console.error(error);
+      } finally {
+        setDeleteList([]);
       }
-    } else {
-      (async () => {
-        await axios.post(`${process.env.REACT_APP_BASE_URL}/product/errorLog`, {}, {
-          params: {
-            message: "Nothing to delete!",
-          },
-        });
-      })();
+    } else if (deleteList.length === 0) {
+      const manualDeleteList = [];
+      const checkboxes = document.querySelectorAll(".delete-checkbox");
+      checkboxes.forEach((checkbox) => {
+        manualDeleteList.push(+checkbox.parentElement.id);
+      });
+      try {
+        await dispatch(massDelete(manualDeleteList)).unwrap();
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
