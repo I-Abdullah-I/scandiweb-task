@@ -61,6 +61,14 @@ const productsSlice = createSlice({
       .addCase(addProduct.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.products.push(action.payload);
+
+        const sortedProducts = state.products
+        .sort((a, b) => {
+          if(a.id > b.id) return 1;
+          else if(a.id < b.id) return -1;
+          else return 0;
+        }).reverse();
+        state.products = sortedProducts;
       })
       .addCase(addProduct.rejected, (state, action) => {
         state.status = "failed";

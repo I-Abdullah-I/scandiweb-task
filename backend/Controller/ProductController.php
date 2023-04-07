@@ -10,9 +10,34 @@ use Model\Products\ProductUtils;
 
 class ProductController extends BaseController
 {
-    private string $strErrorDesc, $strErrorHeader, $requestMethod;
-    private $responseData, $payload;
+    /**
+     * @var string holds error description
+     */
+    private string $strErrorDesc;
     
+    /**
+     * @var string holds error headers
+     */
+    private string $strErrorHeader;
+    
+    /**
+     * @var string holds request method
+     */
+    private string $requestMethod;
+    
+    /**
+     * @var mixed holds response data
+     */
+    private mixed $responseData;
+    
+    /**
+     * @var mixed holds incoming data
+     */
+    private mixed $payload;
+    
+    /**
+     * Initializes important properties that will be used by class members
+     */
     public function __construct()
     {
         $this->strErrorDesc = '';
@@ -21,6 +46,9 @@ class ProductController extends BaseController
         $this->payload = json_decode(file_get_contents("php://input"), true);
     }
 
+    /**
+     * Populates database
+     */
     public function populateAction()
     {
         if (strtoupper($this->requestMethod) == 'GET') {
@@ -48,6 +76,9 @@ class ProductController extends BaseController
         }
     }
 
+    /**
+     * Adds a new product to the database
+     */
     public function addAction()
     {
         if (strtoupper($this->requestMethod) == 'POST') {
@@ -55,8 +86,7 @@ class ProductController extends BaseController
                 $productType = $this->payload["type"];
                 $productFactoryInstance = new ProductFactory();
                 $productInstance = $productFactoryInstance->createProduct($productType);
-                $productInstance->setProductData($this->payload);
-                $addedProduct = $productInstance->addProduct();
+                $addedProduct = $productInstance->addProduct($this->payload);
                 $this->responseData = json_encode($addedProduct);
             } catch (\Exception $e) {
                 $this->strErrorDesc = $e->getMessage();
@@ -78,6 +108,9 @@ class ProductController extends BaseController
         }
     }
     
+    /**
+     * Mass deletes products
+     */
     public function massDeleteAction()
     {
         if (strtoupper($this->requestMethod) == 'DELETE') {
@@ -109,6 +142,9 @@ class ProductController extends BaseController
         }
     }
 
+    /**
+     * Lists all products in database
+     */
     public function listAction()
     {
         if (strtoupper($this->requestMethod) == 'GET') {
@@ -136,6 +172,9 @@ class ProductController extends BaseController
         }
     }
 
+    /**
+     * Checks the existence of a product by sku
+     */
     public function fetchAction()
     {
         $queryParams = $this->getQueryStringParams();

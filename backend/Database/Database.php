@@ -4,8 +4,15 @@ namespace Database;
 
 class Database
 {
-    protected $connection = null;
+    /**
+     * @var mysqli holds an instance of mysqli object used to communicate with the databse
+     */
+    protected ?\mysqli $connection = null;
 
+    /**
+     * Initailizes the connection with the database
+     * @throws Exception if connection cannot be established
+     */
     public function __construct()
     {
         try {
@@ -21,6 +28,12 @@ class Database
         }			
     }
 
+    /**
+     * Handles the insertion of a new record
+     * @param string $query 
+     * @return int
+     * @throws Exception if something went wrong 
+     */
     public function insert(string $query)
     {
         try {
@@ -30,9 +43,14 @@ class Database
         } catch(\Exception $e) {
             throw new \Exception($e->getMessage());
         }
-        return false;
     }
     
+    /**
+     * Handles the deletion of an existing record
+     * @param string $query 
+     * @return bool
+     * @throws Exception if something went wrong 
+     */
     public function delete(string $query)
     {
         try {
@@ -42,9 +60,14 @@ class Database
         } catch(\Exception $e) {
             throw new \Exception($e->getMessage());
         }
-        return false;
     }
-
+    
+    /**
+     * Handles the selection of records
+     * @param string $query 
+     * @return array $records
+     * @throws Exception if something went wrong 
+     */
     public function select(string $query)
     {
         try {
@@ -60,9 +83,14 @@ class Database
         } catch(\Exception $e) {
             throw new \Exception($e->getMessage());
         }
-        return false;
     }
 
+    /**
+     * Handles the execution of a query after checking the validty of it
+     * @param string $query 
+     * @return mysqli_stmt|false $stmt
+     * @throws Exception if something went wrong 
+     */
     private function executeStatement(string $query)
     {
         try {

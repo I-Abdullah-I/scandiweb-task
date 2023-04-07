@@ -5,40 +5,33 @@ namespace Controller;
 class BaseController
 {
     /** 
-* __call magic method. 
-*/
+     * Used to handle requests to undefined endpoints.
+     *
+     * @param string $name
+     * @param array $arguments
+     */
     public function __call($name, $arguments)
     {
         $this->sendOutput('', array('HTTP/1.1 404 Not Found'));
     }
+    
     /** 
-* Get URI elements. 
-* 
-* @return array 
-*/
-    protected function getUriSegments()
+     * Get querystring params. 
+     * 
+     * @return array 
+     */
+    protected function getQueryStringParams()
     {
-        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $uri = explode( '/', $uri );
-        return $uri;
+        parse_str($_SERVER['QUERY_STRING'], $result);
+        return $result;
     }
+
     /** 
-* Get querystring params. 
-* 
-* @return array 
-*/
-protected function getQueryStringParams()
-{
-    parse_str($_SERVER['QUERY_STRING'], $result);
-    // var_dump($result);
-    return $result;
-}
-    /** 
-* Send API output. 
-* 
-* @param mixed $data 
-* @param string $httpHeader 
-*/
+     * Send API output. 
+     * 
+     * @param mixed $data 
+     * @param array $httpHeader 
+     */
     protected function sendOutput($data, $httpHeaders=array())
     {
         header_remove('Set-Cookie');

@@ -6,6 +6,11 @@ use Model\Product;
 
 class PopulateDatabase
 {
+    /**
+     * Populates the database from a json file on local storage.
+     * 
+     * @throws Exception if connection to database cannot be established or insertion fails
+     */
     public function populateFromJsonFile()
     {
         $filePath = PROJECT_ROOT_PATH . "/initialData.json";

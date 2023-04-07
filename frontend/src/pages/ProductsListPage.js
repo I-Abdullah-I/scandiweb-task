@@ -56,13 +56,7 @@ const ProductsListPage = () => {
     }
   }, [status, dispatch]);
 
-  const sortedProducts = Object.values(products)
-    .sort((a, b) => {
-      return a.id > b.id;
-    })
-    .reverse();
-
-  const renderedProducts = sortedProducts.map((product) => (
+  const renderedProducts = products.map((product) => (
     <ProductExcerpt
       key={product.id}
       id={product.id}

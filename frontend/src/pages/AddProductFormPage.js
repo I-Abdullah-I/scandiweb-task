@@ -8,17 +8,19 @@ import { addProduct } from "../features/products/productsSlice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const AddProductFormPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isSkuDuplicate, setIsSkuDuplicate] = useState(false);
 
-  const validateUniqueSKU = async (value, formValues) => {
+  const validateUniqueSKU = async (skuValue) => {
     const response = await axios.get(
       `${process.env.REACT_APP_BASE_URL}/product/fetch`,
       {
         params: {
-          sku: value
+          sku: skuValue,
         },
       }
     );
@@ -38,17 +40,7 @@ const AddProductFormPage = () => {
       weight: "",
     },
     validationSchema: Yup.object({
-      sku: Yup.string()
-        .required("Required"),
-        // .test({
-        //   name: "is_unique",
-        //   message: "Another product is associated with the same sku.",
-        //   test: async (val, ctx) => {
-        //     // console.log(ctx.from[0].value);
-        //     const flag = await validateUniqueSKU(val, ctx.from[0].value);
-        //     return flag;
-        //   },
-        // }),
+      sku: Yup.string().required("Required"),
       name: Yup.string().required("Required"),
       price: Yup.number().required("Required").positive(),
       productType: Yup.string().required("Required"),
@@ -137,6 +129,10 @@ const AddProductFormPage = () => {
   const saveProduct = async () => {
     let payload = formik.values;
     if (formik.isValid) {
+      const uniqueSKU = await validateUniqueSKU(payload.sku);
+      if (!uniqueSKU) {
+        setIsSkuDuplicate(true);
+      }
       const attributes = [
         "size",
         "weight",
@@ -174,6 +170,10 @@ const AddProductFormPage = () => {
     }
   };
 
+  useEffect(() => {
+    setIsSkuDuplicate(false);
+  }, [formik.values.sku]);
+
   return (
     <>
       <div className="header">
@@ -202,6 +202,10 @@ const AddProductFormPage = () => {
             />
             {formik.touched.sku && formik.errors.sku ? (
               <div className="errorText">{formik.errors.sku}</div>
+            ) : isSkuDuplicate ? (
+              <div id="unique" className="errorText">
+                Another product is associated with the same SKU.
+              </div>
             ) : null}
           </div>
 
