@@ -129,10 +129,10 @@ const AddProductFormPage = () => {
   const saveProduct = async () => {
     let payload = formik.values;
     if (formik.isValid) {
-      const uniqueSKU = await validateUniqueSKU(payload.sku);
-      if (!uniqueSKU) {
-        setIsSkuDuplicate(true);
-      }
+      // const uniqueSKU = await validateUniqueSKU(payload.sku);
+      // if (!uniqueSKU) {
+      //   setIsSkuDuplicate(true);
+      // }
       const attributes = [
         "size",
         "weight",
