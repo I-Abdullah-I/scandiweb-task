@@ -45,7 +45,7 @@ abstract class Product
     public function readProductCatalog()
     {
         try{
-            $fetchAllQuery = 'SELECT P.id, P.sku, P.name, P.price, P.type, JSON_OBJECTAGG(A.label, V.attribute_value) AS attributes, P.created_at
+            $fetchAllQuery = 'SELECT P.id, P.sku, P.name, P.price, P.type, JSON_OBJECTAGG(A.label, V.attribute_value) AS attributes
             FROM eav_product_catalog AS P 
             LEFT JOIN eav_product_attribute_value_numeric AS V 
             ON P.id = V.entity_id
@@ -75,7 +75,7 @@ abstract class Product
     public function selectById(array $productIds)
     {
         try {
-            $selectQuery = "SELECT P.id, P.sku, P.name, P.price, P.type, JSON_OBJECTAGG(A.label, V.attribute_value) AS attributes, P.created_at
+            $selectQuery = "SELECT P.id, P.sku, P.name, P.price, P.type, JSON_OBJECTAGG(A.label, V.attribute_value) AS attributes
                 FROM eav_product_catalog AS P 
                 LEFT JOIN eav_product_attribute_value_numeric AS V 
                 ON P.id = V.entity_id
@@ -101,7 +101,7 @@ abstract class Product
     public function selectBySku(array $productSkus)
     {
         try {
-            $selectQuery = "SELECT P.id, P.sku, P.name, P.price, P.type, JSON_OBJECTAGG(A.label, V.attribute_value) AS attributes, P.created_at
+            $selectQuery = "SELECT P.id, P.sku, P.name, P.price, P.type, JSON_OBJECTAGG(A.label, V.attribute_value) AS attributes
                 FROM eav_product_catalog AS P 
                 LEFT JOIN eav_product_attribute_value_numeric AS V 
                 ON P.id = V.entity_id
