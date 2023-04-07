@@ -21,8 +21,6 @@ const ProductExcerpt = ({
     <div id={id} className="productExcerpt">
       <label htmlFor="delete-checkbox" />
       <input
-        id="delete-checkbox"
-        name="delete-checkbox"
         type="checkbox"
         className="delete-checkbox"
         onChange={addToDeleteList}
@@ -35,7 +33,9 @@ const ProductExcerpt = ({
           ? `Size: ${description["size"]} MB`
           : type === "Book"
           ? `Weight: ${description["weight"]} KG`
-          : `Dimension: ${description["height"]}x${description["width"]}x${description["length"]} CM`}
+          : type === "Furniture"
+          ? `Dimension: ${description["height"]}x${description["width"]}x${description["length"]} CM`
+          : null}
       </h4>
     </div>
   );
