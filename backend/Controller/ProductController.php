@@ -36,7 +36,6 @@ class ProductController extends BaseController
             $this->strErrorDesc = 'Method not supported';
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
-        // send output 
         if (!$this->strErrorDesc) {
             $this->sendOutput(
                 $this->responseData,
@@ -67,7 +66,6 @@ class ProductController extends BaseController
             $this->strErrorDesc = 'Method not supported';
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
-        // send output 
         if (!$this->strErrorDesc) {
             $this->sendOutput(
                 $this->responseData,
@@ -99,7 +97,6 @@ class ProductController extends BaseController
             $this->strErrorDesc = 'Method not supported';
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
-        // send output 
         if (!$this->strErrorDesc) {
             $this->sendOutput(
                 $this->responseData,
@@ -127,7 +124,6 @@ class ProductController extends BaseController
             $this->strErrorDesc = 'Method not supported';
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
-        // send output 
         if (!$this->strErrorDesc) {
             $this->sendOutput(
                 $this->responseData,
@@ -162,38 +158,10 @@ class ProductController extends BaseController
             $this->strErrorDesc = 'Method not supported';
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
-        // send output 
         if (!$this->strErrorDesc) {
             $this->sendOutput(
                 $this->responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
-            );
-        } else {
-            $this->sendOutput(json_encode(array('error' => $this->strErrorDesc)), 
-                array('Content-Type: application/json', $this->strErrorHeader)
-            );
-        }
-    }
-
-    public function errorLogAction()
-    {
-        if (strtoupper($this->requestMethod) == 'POST') {
-            try {
-                $error = $this->payload;
-                $this->responseData = json_encode($error);
-            } catch (\Exception $e) {
-                $this->strErrorDesc = $e->getMessage();
-                $this->strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
-            }
-        } else {
-            $this->strErrorDesc = 'Method not supported';
-            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
-        }
-        // send output 
-        if (!$this->strErrorDesc) {
-            $this->sendOutput(
-                $this->responseData,
-                array('Content-Type: application/json', 'HTTP/1.1 201 CREATED')
             );
         } else {
             $this->sendOutput(json_encode(array('error' => $this->strErrorDesc)), 

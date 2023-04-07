@@ -8,7 +8,6 @@ CREATE TABLE eav_product_catalog(
     name VARCHAR(255) NOT NULL,
     price FLOAT NOT NULL,
     type ENUM('DVD', 'Book', 'Furniture') NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY ( id ),
     UNIQUE ( sku )
 );

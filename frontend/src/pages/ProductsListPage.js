@@ -58,7 +58,7 @@ const ProductsListPage = () => {
 
   const sortedProducts = Object.values(products)
     .sort((a, b) => {
-      return new Date(a.created_at) - new Date(b.created_at);
+      return a.id > b.id;
     })
     .reverse();
 
@@ -81,18 +81,10 @@ const ProductsListPage = () => {
         <div className="nav">
           <h1>Product List</h1>
           <div className="actionButtons">
-            <button
-              name="ADD"
-              type="submit"
-              onClick={() => navigate("addproduct")}
-            >
+            <button type="button" onClick={() => navigate("addproduct")}>
               ADD
             </button>
-            <button
-              name="MASS DELETE"
-              type="submit"
-              onClick={() => massDeleteHandler()}
-            >
+            <button type="button" onClick={() => massDeleteHandler()}>
               MASS DELETE
             </button>
           </div>

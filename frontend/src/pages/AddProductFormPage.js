@@ -18,11 +18,7 @@ const AddProductFormPage = () => {
       `${process.env.REACT_APP_BASE_URL}/product/fetch`,
       {
         params: {
-          sku: value,
-          // sku: formValues.sku,
-          // name: formValues.name,
-          // price: formValues.price,
-          // productType: formValues.productType,
+          sku: value
         },
       }
     );
@@ -175,17 +171,6 @@ const AddProductFormPage = () => {
       } catch (error) {
         console.error(error);
       }
-    } else {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/product/errorLog`,
-        formik.errors,
-        {
-          params: {
-            ...formik.errors
-          }
-        }
-      );
-      console.log(response.data);
     }
   };
 
@@ -195,7 +180,7 @@ const AddProductFormPage = () => {
         <div className="nav">
           <h1>Product Add</h1>
           <div className="actionButtons">
-            <button name="Save" type="submit" onClick={() => saveProduct()}>
+            <button type="button" onClick={() => saveProduct()}>
               Save
             </button>
             <button type="button" onClick={() => navigate("/")}>
